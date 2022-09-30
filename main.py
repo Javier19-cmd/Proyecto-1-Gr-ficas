@@ -11,7 +11,7 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(2024, 2024) #Creando la ventana.
+    glCreateWindow(5120, 5120) #Creando la ventana.
     glClearColor(1, 1, 1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     
@@ -26,9 +26,9 @@ def main():
     # del viewport fueron glViewPort(900, 500, 300, 300).
     # El dutch angle se hizo con estas medidas: scale = (0.75, 0.75, 1), translate = (1, 0.2, 0)
     # rotacion = (0, 0, pi/2), glViewPort(700, 800, 300, 300) y lookAt(V3(0, 0, 10), V3(0, 1, 0), V3(0, 1, 0)). 
-    lookAt(V3(0, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    scale = (1, 1, 1) #Escala para las cajas.
+    scale = (0.1, 0.1, 0.1) #Escala para las cajas.
     translate = (1, 0.2, 0) #Traslación para las cajas.
     
     rotacion = (0, 0, 0) #Rotación para las cajas.
@@ -39,7 +39,21 @@ def main():
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
     #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
-    modelo("./box.obj", "./box.bmp", col1) 
+    modelo("./arbol.obj", "./arbol.bmp", col1)
+
+    #Creando otro modelo.
+    glViewPort(1000, 2000, 300, 300) #Asignando el viewport.
+    col2 = (0.1, 0.9, 0.6) #Otro color.
+    
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    translate = (0, 0, 0) #Traslación para las cajas.
+    rotacion = (0, 0, 0) #Rotación para las cajas.
+    scale = (0.9, 0.9, 0.9) #Escala para las cajas.
+
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./plants.obj", "./plants.bmp", col2)
 
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 
