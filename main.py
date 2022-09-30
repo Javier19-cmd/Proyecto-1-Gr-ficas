@@ -15,7 +15,7 @@ def main():
     glClearColor(1, 1, 1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     
-    glViewPort(600, 900, 300, 300) #Asignando el viewport.
+    glViewPort(1000, 900, 500, 500) #Asignando el viewport.
 
     col1 = (0.6, 0.1, 0.9) #Otro color.
 
@@ -41,19 +41,19 @@ def main():
     #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
     modelo("./arbol.obj", "./arbol.bmp", col1)
 
-    #Creando otro modelo.
-    glViewPort(1000, 2000, 300, 300) #Asignando el viewport.
-    col2 = (0.1, 0.9, 0.6) #Otro color.
+    # #Creando otro modelo.
+    # glViewPort(1000, 2000, 300, 300) #Asignando el viewport.
+    # col2 = (0.1, 0.9, 0.6) #Otro color.
     
-    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+    # lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    translate = (0, 0, 0) #Traslación para las cajas.
-    rotacion = (0, 0, 0) #Rotación para las cajas.
-    scale = (0.9, 0.9, 0.9) #Escala para las cajas.
+    # translate = (0, 0, 0) #Traslación para las cajas.
+    # rotacion = (0, 0, 0) #Rotación para las cajas.
+    # scale = (1, 1, 1) #Escala para las cajas.
 
-    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+    # loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    modelo("./plants.obj", "./plants.bmp", col2)
+    # modelo("./plants.obj", "./plants.bmp", col2)
 
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 
