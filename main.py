@@ -67,6 +67,18 @@ def main():
 
     modelo("./box.obj", "./box.bmp", col3)
 
+    # #Creando otro modelo.
+    # glViewPort(2000, 4000, 300, 300) #Asignando el viewport.
+    # col4 = (0.1, 0.9, 0.6) #Otro color.
+
+    # translate = (0, 0, 0) #Traslación para las cajas.
+    # rotacion = (0, 0, 0) #Rotación para las cajas.
+    # scale = (0.1, 0.1, 0.1) #Escala para la manzana.
+
+    # loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    # modelo("./Vase.obj", "./Vase.bmp", col4)
+
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 
 main()
