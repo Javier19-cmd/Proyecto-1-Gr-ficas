@@ -43,6 +43,10 @@ class Render(object):
     #Declarando la matriz de proyección.
     Projection = None
 
+    #Creando listas para dibujar el modelo en el viewport.
+    vertices = [] #Lista de vertices.
+    verticest = [] #Lista para los vértices de las texturas.
+    verticesn = [] #Lista de vertices normalizados.
 
     #Método que escribe el archivo bmp.
     def write(self): #Escribir un archivo, pero con el zbuffer.

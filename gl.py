@@ -496,20 +496,43 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                         vn3 = V3(*r.normal[fn3])
                         vn4 = V3(*r.normal[fn4])
 
-                        #Enviando los vértices al triangle.
-                        triangle(
-                            col1,
-                            (v1, v2, v3), 
-                            (vt1, vt2, vt3),
-                            (vn1, vn2, vn3)
-                            )
+                        # #Enviando los vértices al triangle.
+                        # triangle(
+                        #     (v1, v2, v3), 
+                        #     (vt1, vt2, vt3),
+                        #     (vn1, vn2, vn3)
+                        #     )
                         
-                        triangle(
-                            col1, 
-                            (v1, v3, v4),
-                            (vt1, vt3, vt4), 
-                            (vn1, vn3, vn4)
-                        )
+                        # triangle( 
+                        #     (v1, v3, v4),
+                        #     (vt1, vt3, vt4), 
+                        #     (vn1, vn3, vn4)
+                        # )
+
+                        #Volviendo tuplas.
+                        v1 = v1, v2, v3
+                        v2 = v1, v3, v4
+
+                        vt1 = vt1, vt2, vt3
+                        vt2 = vt1, vt3, vt4
+
+                        vn1 = vn1, vn2, vn3
+                        vn2 = vn1, vn3, vn4
+
+                        #Enviando los vértices a cada lista correspondiente.
+                        #Vértices.
+                        c1.vertices.append(v1)
+                        c1.vertices.append(v2)
+
+                        #Vértices de textura.
+                        c1.verticest.append(vt1)
+                        c1.verticest.append(vt2)
+
+                        #Vértices normales.
+                        c1.verticesn.append(vn1)
+                        c1.verticesn.append(vn2)
+
+
             
             elif len(face) == 3: #Validando que la cara tenga 3 vértices.
                 #El array de caras es bidimensional en este código.
@@ -551,16 +574,33 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                         #vn4 = V3(*r.normal[fn4])
 
                         #Enviando los vértices al triangle.
-                        triangle(
-                            col1,
-                            (v1, v2, v3), 
-                            (vt1, vt2, vt3),
-                            (vn1, vn2, vn3)
-                            )
+                        # triangle(
+                        #     (v1, v2, v3), 
+                        #     (vt1, vt2, vt3),
+                        #     (vn1, vn2, vn3)
+                        #     )
 
-def triangle(col, vertices, tv=(), nv=()): #Función que dibuja un triángulo.
+                        #Volviendo los vértices listas.
+                        v = v1, v2, v3
+                        vt = vt1, vt2, vt3
+                        vn = vn1, vn2, vn3
 
-    A, B, C = vertices #Se obtienen los vértices.
+                        c1.vertices.append(v) #Enviando los vértices a la lista de vértices.
+                        c1.verticest.append(vt) #Enviando los vértices de textura a la lista de vértices de textura.
+                        c1.verticesn.append(vn) #Enviando los vértices normales a la lista de vértices normales.
+
+
+#Método para dibujar los triángulos.
+def draw():
+    #Recorriendo la lista de vértices y guardando los vértices en una variable.
+    for v in c1.vertices:
+        #Enviando los vértices al triangle.
+        triangle(v, c1.verticest[c1.vertices.index(v)], c1.verticesn[c1.vertices.index(v)])
+
+def triangle(vertices, tv=(), nv=()): #Función que dibuja un triángulo.
+
+    #Recibiendo los valores de cada vértice.
+    A, B, C = vertices
 
     if c1.tpath: #Si el path2 no está vacío, entonces se dibuja el triángulo con textura.
         tA, tB, tC = tv #Se obtienen los vértices de textura.

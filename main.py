@@ -41,6 +41,9 @@ def main():
     #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
     modelo("./arbol.obj", "./arbol.bmp", col1)
 
+    #Instanciando el método para dibujar los modelos.
+    draw()
+
     # #Creando otro modelo.
     glViewPort(1000, 2000, 300, 300) #Asignando el viewport.
     col2 = (0.1, 0.9, 0.6) #Otro color.
@@ -55,6 +58,8 @@ def main():
 
     modelo("./plants.obj", "./plants.bmp", col2)
 
+    draw()
+
     #Creando otro modelo.
     glViewPort(1000, 3000, 300, 300) #Asignando el viewport.
     col3 = (0.1, 0.9, 0.6) #Otro color.
@@ -66,6 +71,8 @@ def main():
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
     modelo("./box.obj", "./box.bmp", col3)
+
+    draw()
 
     # #Creando otro modelo.
     # glViewPort(2000, 4000, 300, 300) #Asignando el viewport.
