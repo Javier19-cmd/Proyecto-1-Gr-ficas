@@ -132,88 +132,6 @@ def glClearColor(r, g, b): #Función con la que se pueda cambiar el color con el
 
         #print("Color en glClearColor: ", color(rP, gP, bP)) #Debuggeo.
 
-def glVertex(x, y): #Función que pueda cambiar el color de un punto de la pantalla. Las coordenadas x, y son relativas al viewport que definieron con glViewPort. glVertex(0, 0) cambia el color del punto en el centro del viewport, glVertex(1, 1) en la esquina superior derecha. glVertex(-1, -1) la esquina inferior izquierda
-
-
-    if 0 < x < c1.width and 0 < y < c1.height: #Verificando que las coordenadas estén dentro del viewport.
-        #Escribiendo el punto directamente en el framebuffer.
-        c1.framebuffer[y][x] = c1.colorP #Escribiendo el color el punto en el framebuffer.
-        #c1.Vertex(x, y) #Se manda a hacer el punto.
-
-#Función que crea una línea entre dos puntos. Esta tiene que estar en el rango de 0 a 1.
-def glLine(v1, v2):
-
-
-    #Redondeo para que no haya problemas con los decimales.
-    x0 = round(v1.x)
-    y0 = round(v1.y)
-    x1 = round(v2.x)
-    y1 = round(v2.y)
-
-    puntos = line_algorithm(x0, y0, x1, y1) #Se manda a hacer el algoritmo de la línea.
-
-    for punto in puntos: #Recorriendo los puntos que se obtuvieron del algoritmo de la línea.
-        print(punto)
-
-def line_algorithm(x0, y0, x1, y1): #Función que crea una línea entre dos puntos. Esta tiene que estar en el rango de 0 a 1.
-    #Verifiando las propiedades del viewport.
-    #print(ancho, alto, equis, ye)
-    
-    #Moviendo el punto a la posición deseada.
-    # dy = abs(y1 - y0)
-    # dx = abs(x1 - x0)
-
-    #print("Posiciones: ", x0, y0, x1, y1)
-
-    #Prueba.
-    dx = abs(x1 - x0)
-    dy = abs(y1 - y0)
-
-    #Debuggeo.
-    #print("Cambio en y y cambio en x ", dy, dx)
-    #print("Cambio en x y cambio en y ", dx1, dy1)
-
-
-    steep = dy > dx #Verificando si la línea es vertical o horizontal.
-
-    if steep: #Si la línea es vertical, entonces se cambia el orden de los puntos.
-        x0, y0 = y0, x0
-        x1, y1 = y1, x1
-    
-    if x0 > x1: #Si el punto 1 está a la derecha del punto 2, entonces se cambia el orden de los puntos.
-        x0, x1 = x1, x0
-        y0, y1 = y1, y0
-
-    #Calculando los nuevos cambios.
-    dx = abs(x1 - x0)
-    dy = abs(y1 - y0)
-
-    offset = 0 #Offset de la línea.
-    threshold = dx #Umbral de la línea.	
-    y = y0 #Coordenada y de la línea.
-
-    #Verificando las variables.
-    #print("Offset, threshold, y ",offset, threshold, y)
-
-    #Dibujando la línea.
-    for x in range(x0, x1 + 1):
-        
-        offset += dy * 2 #Cambiando el offset.
-        if offset >= threshold: #Si el offset es mayor o igual al umbral, entonces se cambia la coordenada y.
-            y += 1 if y0 < y1 else -1
-            threshold += 2 * dx
-
-            #print("Punto inicial: ", movx1, movy1)
-            #print("Punto final: ", movx2, movy2)
-
-        if steep: #Si la línea es vertical, entonces se cambia el orden de los puntos.
-            #print("Coordenadas: ", x, y)
-            return (y, x)
-        else: #Si la línea es horizontal, entonces se cambia el orden de los puntos.
-            #print("Puntos dados en decimales ", x0, y0, x1, y1)
-            #print("Coordenadas: ", x, y)
-            return (x, y)
-
 def glColor(r, g, b): #Función con la que se pueda cambiar el color con el que funciona glVertex(). Los parámetros deben ser números en el rango de 0 a 1.
     
     #Convertir el valor de 0 a 1 de 0 a 255 y luego llamar al color.
@@ -223,7 +141,6 @@ def glColor(r, g, b): #Función con la que se pueda cambiar el color con el que 
         print("Error")
     else:
         
-        #print("Color antes de ser cambiado: ", c1.colorP)
         Color = color(r, g, b) #Se manda a hacer el color con las utilidades y se setea el color.
         #print("Color en gl: ", Color)
         c1.colorP = Color #Se setea el color del punto.
@@ -436,7 +353,81 @@ def lookAt(eye, center, up): #Recibe donde está la cámara, el centro y que es 
 
     loadViewMatrix(x, y, z, center) #Cargando la matriz de vista.
     loadProjectionMatrix(eye, center) #Cargando la matriz de proyección.
+
+def glVertex(x, y): #Función que pueda cambiar el color de un punto de la pantalla. Las coordenadas x, y son relativas al viewport que definieron con glViewPort. glVertex(0, 0) cambia el color del punto en el centro del viewport, glVertex(1, 1) en la esquina superior derecha. glVertex(-1, -1) la esquina inferior izquierda
+
+    if 0 < x < c1.width and 0 < y < c1.height: #Verificando que las coordenadas estén dentro del viewport.
+        #Escribiendo el punto directamente en el framebuffer.
+        c1.framebuffer[y][x] = c1.colorP #Escribiendo el color el punto en el framebuffer.
+        #c1.Vertex(x, y) #Se manda a hacer el punto.
+
+#Función que crea una línea entre dos puntos. Esta tiene que estar en el rango de 0 a 1.
+def glLine(v1, v2):
+
+
+    #Redondeo para que no haya problemas con los decimales.
+    x0 = round(v1.x)
+    y0 = round(v1.y)
+    x1 = round(v2.x)
+    y1 = round(v2.y)
+
+    #Verifiando las propiedades del viewport.
+    #print(ancho, alto, equis, ye)
     
+    #Moviendo el punto a la posición deseada.
+    # dy = abs(y1 - y0)
+    # dx = abs(x1 - x0)
+
+    #print("Posiciones: ", x0, y0, x1, y1)
+
+    #Prueba.
+    dx = abs(x1 - x0)
+    dy = abs(y1 - y0)
+
+    #Debuggeo.
+    #print("Cambio en y y cambio en x ", dy, dx)
+    #print("Cambio en x y cambio en y ", dx1, dy1)
+
+
+    steep = dy > dx #Verificando si la línea es vertical o horizontal.
+
+    if steep: #Si la línea es vertical, entonces se cambia el orden de los puntos.
+        x0, y0 = y0, x0
+        x1, y1 = y1, x1
+    
+    if x0 > x1: #Si el punto 1 está a la derecha del punto 2, entonces se cambia el orden de los puntos.
+        x0, x1 = x1, x0
+        y0, y1 = y1, y0
+
+    #Calculando los nuevos cambios.
+    dx = abs(x1 - x0)
+    dy = abs(y1 - y0)
+
+    offset = 0 #Offset de la línea.
+    threshold = dx #Umbral de la línea.	
+    y = y0 #Coordenada y de la línea.
+
+    #Verificando las variables.
+    #print("Offset, threshold, y ",offset, threshold, y)
+
+    #Dibujando la línea.
+    for x in range(x0, x1 + 1):
+        
+        offset += dy * 2 #Cambiando el offset.
+        if offset >= threshold: #Si el offset es mayor o igual al umbral, entonces se cambia la coordenada y.
+            y += 1 if y0 < y1 else -1
+            threshold += 2 * dx
+
+            #print("Punto inicial: ", movx1, movy1)
+            #print("Punto final: ", movx2, movy2)
+
+        if steep: #Si la línea es vertical, entonces se cambia el orden de los puntos.
+            #print("Coordenadas: ", x, y)
+            glVertex(y, x)
+        else: #Si la línea es horizontal, entonces se cambia el orden de los puntos.
+            #print("Puntos dados en decimales ", x0, y0, x1, y1)
+            #print("Coordenadas: ", x, y)
+            glVertex(x, y)
 
 #Este método recibe ahora dos paths. Uno es para el obj y el otro es para el bmp.
 def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
@@ -491,14 +482,14 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
 
                         #Guardando los vértices en una lista.
                         #Primer triángulo.
-                        c1.vertex_buffer_obj.append(vt1)
-                        c1.vertex_buffer_obj.append(vt2)
-                        c1.vertex_buffer_obj.append(vt3)
+                        c1.tvertex_buffer_obj.append(vt1)
+                        c1.tvertex_buffer_obj.append(vt2)
+                        c1.tvertex_buffer_obj.append(vt3)
                         
                         #Segundo triángulo.
-                        c1.vertex_buffer_obj.append(vt2)
-                        c1.vertex_buffer_obj.append(vt3)
-                        c1.vertex_buffer_obj.append(vt4)
+                        c1.tvertex_buffer_obj.append(vt1)
+                        c1.tvertex_buffer_obj.append(vt2)
+                        c1.tvertex_buffer_obj.append(vt4)
                         
                     #Verificando si el modelo tiene normales.
                         #Jalando las normales de los vértices.
@@ -515,14 +506,14 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
 
                         #Guardando los vértices en una lista.
                         #Primer triángulo.
-                        c1.vertex_buffer_obj.append(vn1)
-                        c1.vertex_buffer_obj.append(vn2)
-                        c1.vertex_buffer_obj.append(vn3)
+                        c1.nvertex_buffer_obj.append(vn1)
+                        c1.nvertex_buffer_obj.append(vn2)
+                        c1.nvertex_buffer_obj.append(vn3)
 
                         #Segundo triángulo.
-                        c1.vertex_buffer_obj.append(vn2)
-                        c1.vertex_buffer_obj.append(vn3)
-                        c1.vertex_buffer_obj.append(vn4)
+                        c1.nvertex_buffer_obj.append(vn1)
+                        c1.nvertex_buffer_obj.append(vn2)
+                        c1.nvertex_buffer_obj.append(vn4)
             
             elif len(face) == 3: #Validando que la cara tenga 3 vértices.
                 #El array de caras es bidimensional en este código.
@@ -556,9 +547,9 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                         #vt4 = V3(*r.vts[ft4])
 
                         #Guardando los vértices en una lista.
-                        c1.vertex_buffer_obj.append(vt1)
-                        c1.vertex_buffer_obj.append(vt2)
-                        c1.vertex_buffer_obj.append(vt3)
+                        c1.tvertex_buffer_obj.append(vt1)
+                        c1.tvertex_buffer_obj.append(vt2)
+                        c1.tvertex_buffer_obj.append(vt3)
                         
                     #Verificando si el modelo tiene normales.
                         #Jalando las normales de los vértices.
@@ -574,29 +565,27 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                         #vn4 = V3(*r.normal[fn4])
 
                         #Guardando los vértices en una lista.
-                        c1.vertex_buffer_obj.append(vn1)
-                        c1.vertex_buffer_obj.append(vn2)
-                        c1.vertex_buffer_obj.append(vn3)
-
-                        #Volviendo los vértices listas.
+                        c1.nvertex_buffer_obj.append(vn1)
+                        c1.nvertex_buffer_obj.append(vn2)
+                        c1.nvertex_buffer_obj.append(vn3)
 
 def dibujar(poligono): #Función para dibujar los polígonos.
     c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
 
     #Dibujando los polígonos.
     if poligono == 'triangle': #Dibujando triángulos.
-        while True: #Dibujando los triángulos.
-            try:
+        try:
+            while True: #Dibujando los triángulos.
                 triangle_wire() #Dibujando los triángulos.
-            except StopIteration:
-                break
+        except StopIteration:
+            print('Dibujando triángulos...')
 
     elif poligono == 'square': #Dibujando cuadrados.
-        while True:
-            try:
+        try:
+            while True:
                 square_wire() #Dibujando los cuadrados.
-            except StopIteration:
-                break
+        except StopIteration:
+            print('Dibujando cuadrados...')
 
 def triangle_wire(): #Función para dibujar los triángulos en wireframe.
     #Dibujando los triángulos.
@@ -608,11 +597,16 @@ def triangle_wire(): #Función para dibujar los triángulos en wireframe.
         tA = next(c1.active_vertex_array)
         tB = next(c1.active_vertex_array)
         tC = next(c1.active_vertex_array)
+
+        glLine(tA, tB)
+        glLine(tB, tC)
+        glLine(tC, tA)
     
-    #Dibujando los triángulos.
-    glLine(A, B)
-    glLine(B, C)
-    glLine(C, A)
+    else:     
+        #Dibujando los triángulos.
+        glLine(A, B)
+        glLine(B, C)
+        glLine(C, A)
 
 def square_wire(): #Función para dibujar los cuadrados en wireframe.
     #Dibujando los cuadrados.
@@ -621,19 +615,42 @@ def square_wire(): #Función para dibujar los cuadrados en wireframe.
     C = next(c1.active_vertex_array)
     D = next(c1.active_vertex_array)
 
-    if c1.tpath:
+    if c1.tpath: #Si hay textura.
         tA = next(c1.active_vertex_array)
         tB = next(c1.active_vertex_array)
         tC = next(c1.active_vertex_array)
         tD = next(c1.active_vertex_array)
+
+        #Dibujando dos triángulos.
+        #Primer triángulo.
+        glLine(tA, tB)
+        glLine(tB, tC)
+        glLine(tC, tA)
+
+        #Segundo triángulo.
+        glLine(tA, tC)
+        glLine(tC, tD)
+        glLine(tD, tA)
+
+    else:    
+        
+        #Dibujando dos triángulos.
+        #Primer triángulo.
+        glLine(A, B)
+        glLine(B, C)
+        glLine(C, A)
+
+        #Segundo triángulo.
+        glLine(A, C)
+        glLine(C, D)
+        glLine(D, A)
     
-    #Dibujando los cuadrados.
-    glLine(A, B)
-    glLine(B, C)
-    glLine(C, D)
-    glLine(D, A)
 
 def triangle(): #Función que dibuja un triángulo.
+
+    c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
+    c1.active_tvertex_array = iter(c1.tvertex_buffer_obj) #Iterando el vertex buffer object.
+    c1.active_nvertex_array = iter(c1.nvertex_buffer_obj) #Iterando el vertex buffer object.
 
     #Recibiendo los valores de cada vértice.
     A = next(c1.active_vertex_array)
@@ -641,14 +658,15 @@ def triangle(): #Función que dibuja un triángulo.
     C = next(c1.active_vertex_array)
 
     if c1.tpath: #Si el path2 no está vacío, entonces se dibuja el triángulo con textura.
-        tA = next(c1.active_vertex_array)
-        tB = next(c1.active_vertex_array)
-        tC = next(c1.active_vertex_array)
+        #Texturas.
+        tA = next(c1.active_tvertex_array)
+        tB = next(c1.active_tvertex_array)
+        tC = next(c1.active_tvertex_array)
 
-    
-    nA = next(c1.active_vertex_array)
-    nB = next(c1.active_vertex_array)
-    nC = next(c1.active_vertex_array)
+    #Normales.
+    nA = next(c1.active_nvertex_array)
+    nB = next(c1.active_nvertex_array)
+    nC = next(c1.active_nvertex_array)
 
     #print(col[0], col[1], col[2])
 

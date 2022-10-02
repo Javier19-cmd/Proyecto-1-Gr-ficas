@@ -29,7 +29,7 @@ def main():
     # rotacion = (0, 0, pi/2), glViewPort(700, 800, 300, 300) y lookAt(V3(0, 0, 10), V3(0, 1, 0), V3(0, 1, 0)). 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    scale = (0.1, 0.1, 0.1) #Escala para las cajas.
+    scale = (0.5, 0.5, 0.5) #Escala para las cajas.
     translate = (1, 0.2, 0) #Traslación para las cajas.
     
     rotacion = (0, 0, 0) #Rotación para las cajas.
@@ -40,7 +40,7 @@ def main():
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
     #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
-    modelo("./Apple.obj", "./Apple.bmp", col1)
+    modelo("./Patrick.obj", "./arbol.bmp", col1)
 
     dibujar("triangle") #Dibujando la imagen.
     dibujar("square") #Dibujando la imagen.
