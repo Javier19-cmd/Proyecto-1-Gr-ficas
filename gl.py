@@ -571,6 +571,8 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
 
 def dibujar(poligono): #Función para dibujar los polígonos.
     c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
+    c1.active_tvertex_array = iter(c1.tvertex_buffer_obj) #Iterando el vertex buffer object.
+    c1.active_nvertex_array = iter(c1.nvertex_buffer_obj) #Iterando el vertex buffer object.
 
     #Dibujando los polígonos.
     if poligono == 'triangle': #Dibujando triángulos.
@@ -587,26 +589,35 @@ def dibujar(poligono): #Función para dibujar los polígonos.
         except StopIteration:
             print('Dibujando cuadrados...')
 
+#Función para dibujar los triángulos.
+def drawModel():
+    try:
+        while True:
+            #Dibujando los triángulos.
+            triangle()
+    except StopIteration:
+            print('Dibujando triángulos...')
+
 def triangle_wire(): #Función para dibujar los triángulos en wireframe.
     #Dibujando los triángulos.
     A = next(c1.active_vertex_array)
     B = next(c1.active_vertex_array)
     C = next(c1.active_vertex_array)
 
-    if c1.tpath:
-        tA = next(c1.active_vertex_array)
-        tB = next(c1.active_vertex_array)
-        tC = next(c1.active_vertex_array)
+    # if c1.tpath: #Verificando que sí haya una textura.
+    #     tA = next(c1.active_vertex_array)
+    #     tB = next(c1.active_vertex_array)
+    #     tC = next(c1.active_vertex_array)
 
-        glLine(tA, tB)
-        glLine(tB, tC)
-        glLine(tC, tA)
+    #     glLine(tA, tB) #Haciendo la línea.
+    #     glLine(tB, tC) #Haciendo la línea.
+    #     glLine(tC, tA) #Haciendo la línea.
     
-    else:     
+    # else: #Si no hay textura, entonces se dibuja el wireframe.
         #Dibujando los triángulos.
-        glLine(A, B)
-        glLine(B, C)
-        glLine(C, A)
+    glLine(A, B)
+    glLine(B, C)
+    glLine(C, A)
 
 def square_wire(): #Función para dibujar los cuadrados en wireframe.
     #Dibujando los cuadrados.
@@ -615,36 +626,36 @@ def square_wire(): #Función para dibujar los cuadrados en wireframe.
     C = next(c1.active_vertex_array)
     D = next(c1.active_vertex_array)
 
-    if c1.tpath: #Si hay textura.
-        tA = next(c1.active_vertex_array)
-        tB = next(c1.active_vertex_array)
-        tC = next(c1.active_vertex_array)
-        tD = next(c1.active_vertex_array)
+    # if c1.tpath: #Si hay textura.
+    #     tA = next(c1.active_vertex_array)
+    #     tB = next(c1.active_vertex_array)
+    #     tC = next(c1.active_vertex_array)
+    #     tD = next(c1.active_vertex_array)
+    #     #print(c1.active_tvertex_array)
 
-        #Dibujando dos triángulos.
-        #Primer triángulo.
-        glLine(tA, tB)
-        glLine(tB, tC)
-        glLine(tC, tA)
+    #     #Dibujando dos triángulos.
+    #     #Primer triángulo.
+    #     glLine(tA, tB)
+    #     glLine(tB, tC)
+    #     glLine(tC, tA)
 
-        #Segundo triángulo.
-        glLine(tA, tC)
-        glLine(tC, tD)
-        glLine(tD, tA)
+    #     #Segundo triángulo.
+    #     glLine(tA, tC)
+    #     glLine(tC, tD)
+    #     glLine(tD, tA)
 
-    else:    
+    # else:
         
-        #Dibujando dos triángulos.
-        #Primer triángulo.
-        glLine(A, B)
-        glLine(B, C)
-        glLine(C, A)
+    #Dibujando dos triángulos.
+    #Primer triángulo.
+    glLine(A, B)
+    glLine(B, C)
+    glLine(C, A)
 
-        #Segundo triángulo.
-        glLine(A, C)
-        glLine(C, D)
-        glLine(D, A)
-    
+    #Segundo triángulo.
+    glLine(A, C)
+    glLine(C, D)
+    glLine(D, A)
 
 def triangle(): #Función que dibuja un triángulo.
 
