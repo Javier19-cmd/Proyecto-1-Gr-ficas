@@ -29,7 +29,7 @@ def main():
     # rotacion = (0, 0, pi/2), glViewPort(700, 800, 300, 300) y lookAt(V3(0, 0, 10), V3(0, 1, 0), V3(0, 1, 0)). 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    scale = (0.5, 0.5, 0.5) #Escala para las cajas.
+    scale = (0.1, 0.1, 0.1) #Escala para las cajas.
     translate = (1, 0.2, 0) #Traslación para las cajas.
     
     rotacion = (0, 0, 0) #Rotación para las cajas.
@@ -40,50 +40,12 @@ def main():
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
     #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
-    modelo("./Patrick.obj", "./arbol.bmp", col1)
+    modelo("./arbol.obj", "./arbol.bmp", col1)
 
     dibujar("triangle") #Dibujando la imagen.
     dibujar("square") #Dibujando la imagen.
 
-    # # #Creando otro modelo.
-    # glViewPort(1000, 2000, 300, 300) #Asignando el viewport.
-    # col2 = (0.1, 0.9, 0.6) #Otro color.
-    
-    # lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
-
-    # translate = (0, 0, 0) #Traslación para las cajas.
-    # rotacion = (0, 0, 0) #Rotación para las cajas.
-    # scale = (1, 1, 1) #Escala para las cajas.
-
-    # loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
-
-    # modelo("./plants.obj", "./plants.bmp", col2)
-
-
-
-    # #Creando otro modelo.
-    # glViewPort(1000, 3000, 300, 300) #Asignando el viewport.
-    # col3 = (0.1, 0.9, 0.6) #Otro color.
-
-    # translate = (0, 0, 0) #Traslación para las cajas.
-    # rotacion = (0, 0, 0) #Rotación para las cajas.
-    # scale = (1, 1, 1) #Escala para las cajas.
-
-    # loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
-
-    # modelo("./box.obj", "./box.bmp", col3)
-
-    # #Creando otro modelo.
-    # glViewPort(2000, 4000, 300, 300) #Asignando el viewport.
-    # col4 = (0.1, 0.9, 0.6) #Otro color.
-
-    # translate = (0, 0, 0) #Traslación para las cajas.
-    # rotacion = (0, 0, 0) #Rotación para las cajas.
-    # scale = (0.1, 0.1, 0.1) #Escala para la manzana.
-
-    # loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
-
-    # modelo("./Vase.obj", "./Vase.bmp", col4)
+    #drawModel() #Dibujando el modelo.
 
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 

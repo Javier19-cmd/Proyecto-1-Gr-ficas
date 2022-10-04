@@ -26,6 +26,8 @@ SR4:
 """
 
 from pyexpat import model
+
+from matplotlib.pyplot import draw
 from Render import * #Importando la clase Render.
 from utilidades import *
 from vector import *
@@ -579,6 +581,7 @@ def dibujar(poligono): #Función para dibujar los polígonos.
         try:
             while True: #Dibujando los triángulos.
                 triangle_wire() #Dibujando los triángulos.
+                #drawModel() #Dibujando los triángulos.
         except StopIteration:
             print('Dibujando triángulos...')
 
