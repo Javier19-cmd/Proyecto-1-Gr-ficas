@@ -11,12 +11,12 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(1024, 1024) #Creando la ventana.
+    glCreateWindow(5120, 5120) #Creando la ventana.
     glClearColor(1, 1, 1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
     
-    glViewPort(500, 500, 500, 500) #Asignando el viewport.
+    glViewPort(500, 500, 1000, 1000) #Asignando el viewport.
 
     col1 = (0.6, 0.1, 0.9) #Otro color.
 
@@ -32,7 +32,7 @@ def main():
     scale = (1, 1, 1) #Escala para las cajas.
     translate = (1, 0.2, 0) #Traslación para las cajas.
     
-    rotacion = (0, 0, 0) #Rotación para las cajas.
+    rotacion = (0, pi/2, 0) #Rotación para las cajas.
 
     print("Rotación: ", rotacion)
     
@@ -40,7 +40,7 @@ def main():
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
     #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
-    modelo("./barrel.obj", "./barrel.bmp", col1)
+    modelo("./model.obj", "./model.bmp", col1)
 
     #dibujar("triangle") #Dibujando la imagen.
     #dibujar("square") #Dibujando la imagen.

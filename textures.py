@@ -38,6 +38,8 @@ class Texture: #Clase para la textura.
         
         x = int(tx * self.width) #Redondeando el valor de x.
         y = int(ty * self.height) #Redondeando el valor de y.
+
+        #print(x, y)
         
         #print(tx, ty, x, y) #Imprimiendo los valores de x y y.
 
@@ -55,7 +57,7 @@ class Texture: #Clase para la textura.
         r = int(self.pixels[y][x][2] * intensity) #Obteniendo el valor de r.
 
         return color(r/255, g/255, b/255) #Se devuelve el color de un pixel con una intensidad.
-        #else:
-         #   return color(0, 0, 0)
+        # else:
+        #        return color(0, 0, 0)
 #t = Texture("./earth.bmp") #Se crea la textura.
 #print(t.get_color_with_intensity(0, 0, 1)) #Se obtiene el color de un pixel.

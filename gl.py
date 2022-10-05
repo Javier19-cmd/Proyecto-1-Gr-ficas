@@ -693,7 +693,7 @@ def triangle(): #Función que dibuja un triángulo.
         tB = next(c1.active_vertex_array)
         tC = next(c1.active_vertex_array)
 
-        print(tA, tB, tC)
+       # print(tA, tB, tC)
 
     #Normales.
     nA = next(c1.active_vertex_array)
@@ -777,7 +777,7 @@ def shader(render, **kwargs): #Función hace los shaders.
    i = iA * w + iB * u + iC * v #Se calcula la intensidad del punto P.
 
    if i < 0: #Si la intensidad es menor que 0, entonces se setea en 0.
-        i = abs(i)
+        i = 0
 
    #print("Textura: ", tA, tB, tC) #Se imprimen los vértices de textura.
    #print("Intensidad: ", i) #Se imprime la intensidad.
@@ -788,8 +788,9 @@ def shader(render, **kwargs): #Función hace los shaders.
         tx = tA.x * w + tB.x * v + tC.x * u #Se calcula la x de la textura.
         ty = tA.y * w + tB.y * v + tC.y * u #Se calcula la y de la textura.
 
-        #print("Textura: ", tx, ty) #Se imprimen los vértices de textura.
-        
+        #print("Textura: ", abs(tx), abs(ty)) #Se imprimen los vértices de textura.
+
+        #b1, g1, r1 = c2.get_color_with_intensity(tx, ty, i)
 
         b, g, r = render.colorP = c2.get_color_with_intensity(tx, ty, i) #Se obtiene el color de la textura con la intensidad.
 
@@ -826,7 +827,7 @@ def shader(render, **kwargs): #Función hace los shaders.
 
         #return color(255/255, 255/255, 255/255) #Se setea el color del punto con textura.
 
-        return render.colorP #Se setea el color del punto con textura.
+        return c2.get_color_with_intensity(tx, ty, i) #Se setea el color del punto con textura.
 
     #print("Y: ", y)
     #return color(1, 0, 0)
