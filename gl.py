@@ -593,6 +593,8 @@ def dibujar(poligono): #Función para dibujar los polígonos.
 
 #Función para dibujar los triángulos.
 def drawModel():
+    c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
+
     try:
         while True:
             #Dibujando los triángulos.
@@ -676,7 +678,7 @@ def square_wire(): #Función para dibujar los cuadrados en wireframe.
 
 def triangle(): #Función que dibuja un triángulo.
 
-    c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
+    #c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
     # c1.active_tvertex_array = iter(c1.tvertex_buffer_obj) #Iterando el vertex buffer object.
     # c1.active_nvertex_array = iter(c1.nvertex_buffer_obj) #Iterando el vertex buffer object.
 
@@ -690,6 +692,8 @@ def triangle(): #Función que dibuja un triángulo.
         tA = next(c1.active_vertex_array)
         tB = next(c1.active_vertex_array)
         tC = next(c1.active_vertex_array)
+
+        print(tA, tB, tC)
 
     #Normales.
     nA = next(c1.active_vertex_array)
@@ -783,6 +787,8 @@ def shader(render, **kwargs): #Función hace los shaders.
    if render.tpath: #Si el path2 no está vacío, entonces se dibuja el triángulo con textura.
         tx = tA.x * w + tB.x * v + tC.x * u #Se calcula la x de la textura.
         ty = tA.y * w + tB.y * v + tC.y * u #Se calcula la y de la textura.
+
+        #print("Textura: ", tx, ty) #Se imprimen los vértices de textura.
         
 
         b, g, r = render.colorP = c2.get_color_with_intensity(tx, ty, i) #Se obtiene el color de la textura con la intensidad.
