@@ -25,9 +25,6 @@ SR4:
     https://www.yawintutor.com/zerodivisionerror-division-by-zero/
 """
 
-from pyexpat import model
-
-from matplotlib.pyplot import draw
 from Render import * #Importando la clase Render.
 from utilidades import *
 from vector import *
@@ -46,7 +43,6 @@ c2 = Texture() #Inicializando las texturas.
 
 #Pregunar si está bien implementada esta función.
 def glInit(): #Se usará para poder inicializar cualquier objeto interno que requiera el software de render.
-
     pass
 
 def glCreateWindow(width, height): #Preguntar de esta función.
@@ -360,13 +356,13 @@ def glVertex(x, y): #Función que pueda cambiar el color de un punto de la panta
 
     if 0 < x < c1.width and 0 < y < c1.height: #Verificando que las coordenadas estén dentro del viewport.
         #Escribiendo el punto directamente en el framebuffer.
+        #print("Punto: ", x, y)
         c1.framebuffer[y][x] = c1.colorP #Escribiendo el color el punto en el framebuffer.
         #c1.Vertex(x, y) #Se manda a hacer el punto.
 
 #Función que crea una línea entre dos puntos. Esta tiene que estar en el rango de 0 a 1.
 def glLine(v1, v2):
-
-
+    
     #Redondeo para que no haya problemas con los decimales.
     x0 = round(v1.x)
     y0 = round(v1.y)
@@ -423,13 +419,17 @@ def glLine(v1, v2):
             #print("Punto inicial: ", movx1, movy1)
             #print("Punto final: ", movx2, movy2)
 
+
         if steep: #Si la línea es vertical, entonces se cambia el orden de los puntos.
             #print("Coordenadas: ", x, y)
             glVertex(y, x)
+            #print(y, x)
+        
         else: #Si la línea es horizontal, entonces se cambia el orden de los puntos.
             #print("Puntos dados en decimales ", x0, y0, x1, y1)
             #print("Coordenadas: ", x, y)
             glVertex(x, y)
+            #print(x, y)
 
 #Este método recibe ahora dos paths. Uno es para el obj y el otro es para el bmp.
 def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
@@ -470,30 +470,27 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                 c1.vertex_buffer_obj.append(v4)
 
                 if c1.tpath: #Si hay una textura, entonces se dibuja la cara con textura.
+                    
+                    ft1 = face[0][1] - 1 #Se le resta 1 porque el array de vértices empieza en 0.
+                    ft2 = face[1][1] - 1 #Agarrando el índice 0.
+                    ft3 = face[2][1] - 1 #Agarrando el índice 1.
+                    ft4 = face[3][1] - 1 #Agarrando el índice 2.
+
+                    #Transformando los vértices.
+                    vt1 = V3(*r.vts[ft1])
+                    vt2 = V3(*r.vts[ft2])
+                    vt3 = V3(*r.vts[ft3])
+                    vt4 = V3(*r.vts[ft4])
+
+                    #Guardando los vértices en una lista.
+                    #Primer triángulo.
+                    c1.vertex_buffer_obj.append(vt1)
+                    c1.vertex_buffer_obj.append(vt2)
+                    c1.vertex_buffer_obj.append(vt3)
+                    c1.vertex_buffer_obj.append(vt4)
+
                     if r.normal:
-                        ft1 = face[0][1] - 1 #Se le resta 1 porque el array de vértices empieza en 0.
-                        ft2 = face[1][1] - 1 #Agarrando el índice 0.
-                        ft3 = face[2][1] - 1 #Agarrando el índice 1.
-                        ft4 = face[3][1] - 1 #Agarrando el índice 2.
-
-                        #Transformando los vértices.
-                        vt1 = V3(*r.vts[ft1])
-                        vt2 = V3(*r.vts[ft2])
-                        vt3 = V3(*r.vts[ft3])
-                        vt4 = V3(*r.vts[ft4])
-
-                        #Guardando los vértices en una lista.
-                        #Primer triángulo.
-                        c1.tvertex_buffer_obj.append(vt1)
-                        c1.tvertex_buffer_obj.append(vt2)
-                        c1.tvertex_buffer_obj.append(vt3)
-                        
-                        #Segundo triángulo.
-                        c1.tvertex_buffer_obj.append(vt1)
-                        c1.tvertex_buffer_obj.append(vt2)
-                        c1.tvertex_buffer_obj.append(vt4)
-                        
-                    #Verificando si el modelo tiene normales.
+                        #Verificando si el modelo tiene normales.
                         #Jalando las normales de los vértices.
                         fn1 = face[0][2] - 1 #Se le resta 1 porque el array de vértices empieza en 0.
                         fn2 = face[1][2] - 1 #Agarrando el índice 0.
@@ -508,14 +505,13 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
 
                         #Guardando los vértices en una lista.
                         #Primer triángulo.
-                        c1.nvertex_buffer_obj.append(vn1)
-                        c1.nvertex_buffer_obj.append(vn2)
-                        c1.nvertex_buffer_obj.append(vn3)
+                        c1.vertex_buffer_obj.append(vn1)
+                        c1.vertex_buffer_obj.append(vn2)
+                        c1.vertex_buffer_obj.append(vn3)
+                        c1.vertex_buffer_obj.append(vn4)
+                        
 
-                        #Segundo triángulo.
-                        c1.nvertex_buffer_obj.append(vn1)
-                        c1.nvertex_buffer_obj.append(vn2)
-                        c1.nvertex_buffer_obj.append(vn4)
+                        c1.normales = True #Activando las normales.
             
             elif len(face) == 3: #Validando que la cara tenga 3 vértices.
                 #El array de caras es bidimensional en este código.
@@ -536,23 +532,24 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                 c1.vertex_buffer_obj.append(v3)
 
                 if c1.tpath: #Si hay una textura, entonces se dibuja la cara con textura.
-                    if r.normal:
-                        ft1 = face[0][1] - 1 #Se le resta 1 porque el array de vértices empieza en 0.
-                        ft2 = face[1][1] - 1 #Agarrando el índice 0.
-                        ft3 = face[2][1] - 1 #Agarrando el índice 1.
-                        #ft4 = face[3][1] - 1 #Agarrando el índice 2.
+                    
+                    ft1 = face[0][1] - 1 #Se le resta 1 porque el array de vértices empieza en 0.
+                    ft2 = face[1][1] - 1 #Agarrando el índice 0.
+                    ft3 = face[2][1] - 1 #Agarrando el índice 1.
+                    #ft4 = face[3][1] - 1 #Agarrando el índice 2.
 
-                        #Transformando los vértices.
-                        vt1 = V3(*r.vts[ft1])
-                        vt2 = V3(*r.vts[ft2])
-                        vt3 = V3(*r.vts[ft3])
-                        #vt4 = V3(*r.vts[ft4])
+                    #Transformando los vértices.
+                    vt1 = V3(*r.vts[ft1])
+                    vt2 = V3(*r.vts[ft2])
+                    vt3 = V3(*r.vts[ft3])
+                    #vt4 = V3(*r.vts[ft4])
 
-                        #Guardando los vértices en una lista.
-                        c1.tvertex_buffer_obj.append(vt1)
-                        c1.tvertex_buffer_obj.append(vt2)
-                        c1.tvertex_buffer_obj.append(vt3)
-                        
+                    #Guardando los vértices en una lista.
+                    c1.vertex_buffer_obj.append(vt1)
+                    c1.vertex_buffer_obj.append(vt2)
+                    c1.vertex_buffer_obj.append(vt3)
+
+                    if r.normal:                        
                     #Verificando si el modelo tiene normales.
                         #Jalando las normales de los vértices.
                         fn1 = face[0][2] - 1 #Se le resta 1 porque el array de vértices empieza en 0.
@@ -567,19 +564,20 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                         #vn4 = V3(*r.normal[fn4])
 
                         #Guardando los vértices en una lista.
-                        c1.nvertex_buffer_obj.append(vn1)
-                        c1.nvertex_buffer_obj.append(vn2)
-                        c1.nvertex_buffer_obj.append(vn3)
+                        c1.vertex_buffer_obj.append(vn1)
+                        c1.vertex_buffer_obj.append(vn2)
+                        c1.vertex_buffer_obj.append(vn3)
+
+                        c1.normales = True #Activando las normales.
 
 def dibujar(poligono): #Función para dibujar los polígonos.
     c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
-    c1.active_tvertex_array = iter(c1.tvertex_buffer_obj) #Iterando el vertex buffer object.
-    c1.active_nvertex_array = iter(c1.nvertex_buffer_obj) #Iterando el vertex buffer object.
-
+    
     #Dibujando los polígonos.
     if poligono == 'triangle': #Dibujando triángulos.
         try:
             while True: #Dibujando los triángulos.
+                #triangle() #Dibujando el triángulo.
                 triangle_wire() #Dibujando los triángulos.
                 #drawModel() #Dibujando los triángulos.
         except StopIteration:
@@ -588,6 +586,7 @@ def dibujar(poligono): #Función para dibujar los polígonos.
     elif poligono == 'square': #Dibujando cuadrados.
         try:
             while True:
+                #triangle_wire() #Dibujando los triángulos.
                 square_wire() #Dibujando los cuadrados.
         except StopIteration:
             print('Dibujando cuadrados...')
@@ -601,21 +600,42 @@ def drawModel():
     except StopIteration:
             print('Dibujando triángulos...')
 
+#Función para dibujar los cuadrados.
+def draw_square():
+    try:
+        while True:
+            #Dibujando los cuadrados.
+            square()
+    except StopIteration:
+            print('Dibujando cuadrados...')
+
+def square():
+    #Dibujando los cuadrados.
+    A = next(c1.active_vertex_array)
+    B = next(c1.active_vertex_array)
+    C = next(c1.active_vertex_array)
+    D = next(c1.active_vertex_array)
+
+    #Dibujando los cuadrados.
+    triangle(A, B, C)
+    triangle(A, C, D)
+
 def triangle_wire(): #Función para dibujar los triángulos en wireframe.
     #Dibujando los triángulos.
     A = next(c1.active_vertex_array)
     B = next(c1.active_vertex_array)
     C = next(c1.active_vertex_array)
 
-    # if c1.tpath: #Verificando que sí haya una textura.
-    #     tA = next(c1.active_vertex_array)
-    #     tB = next(c1.active_vertex_array)
-    #     tC = next(c1.active_vertex_array)
+    if c1.tpath: #Verificando que sí haya una textura.
+        tA = next(c1.active_vertex_array)
+        tB = next(c1.active_vertex_array)
+        tC = next(c1.active_vertex_array)
 
-    #     glLine(tA, tB) #Haciendo la línea.
-    #     glLine(tB, tC) #Haciendo la línea.
-    #     glLine(tC, tA) #Haciendo la línea.
-    
+    # if c1.normales: #Verificando que sí haya normales.
+    #     nA = next(c1.active_vertex_array)
+    #     nB = next(c1.active_vertex_array)
+    #     nC = next(c1.active_vertex_array)
+        
     # else: #Si no hay textura, entonces se dibuja el wireframe.
         #Dibujando los triángulos.
     glLine(A, B)
@@ -629,42 +649,36 @@ def square_wire(): #Función para dibujar los cuadrados en wireframe.
     C = next(c1.active_vertex_array)
     D = next(c1.active_vertex_array)
 
-    # if c1.tpath: #Si hay textura.
-    #     tA = next(c1.active_vertex_array)
-    #     tB = next(c1.active_vertex_array)
-    #     tC = next(c1.active_vertex_array)
-    #     tD = next(c1.active_vertex_array)
-    #     #print(c1.active_tvertex_array)
+    if c1.tpath: #Si hay textura.
+        tA = next(c1.active_vertex_array)
+        tB = next(c1.active_vertex_array)
+        tC = next(c1.active_vertex_array)
+        tD = next(c1.active_vertex_array)
+        #print(c1.active_tvertex_array)
 
-    #     #Dibujando dos triángulos.
-    #     #Primer triángulo.
-    #     glLine(tA, tB)
-    #     glLine(tB, tC)
-    #     glLine(tC, tA)
-
-    #     #Segundo triángulo.
-    #     glLine(tA, tC)
-    #     glLine(tC, tD)
-    #     glLine(tD, tA)
-
-    # else:
-        
-    #Dibujando dos triángulos.
-    #Primer triángulo.
+    # if c1.normales: #Si hay normales.
+    #     nA = next(c1.active_vertex_array)
+    #     nB = next(c1.active_vertex_array)
+    #     nC = next(c1.active_vertex_array)
+    #     nD = next(c1.active_vertex_array)
+       
+    #Dibujando los triángulos.
+    #Dibujando el primer triángulo.
     glLine(A, B)
     glLine(B, C)
     glLine(C, A)
 
-    #Segundo triángulo.
+    #Dibujando el segundo triángulo.
     glLine(A, C)
     glLine(C, D)
     glLine(D, A)
 
+
 def triangle(): #Función que dibuja un triángulo.
 
     c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
-    c1.active_tvertex_array = iter(c1.tvertex_buffer_obj) #Iterando el vertex buffer object.
-    c1.active_nvertex_array = iter(c1.nvertex_buffer_obj) #Iterando el vertex buffer object.
+    # c1.active_tvertex_array = iter(c1.tvertex_buffer_obj) #Iterando el vertex buffer object.
+    # c1.active_nvertex_array = iter(c1.nvertex_buffer_obj) #Iterando el vertex buffer object.
 
     #Recibiendo los valores de cada vértice.
     A = next(c1.active_vertex_array)
@@ -673,14 +687,15 @@ def triangle(): #Función que dibuja un triángulo.
 
     if c1.tpath: #Si el path2 no está vacío, entonces se dibuja el triángulo con textura.
         #Texturas.
-        tA = next(c1.active_tvertex_array)
-        tB = next(c1.active_tvertex_array)
-        tC = next(c1.active_tvertex_array)
+        tA = next(c1.active_vertex_array)
+        tB = next(c1.active_vertex_array)
+        tC = next(c1.active_vertex_array)
 
     #Normales.
-    nA = next(c1.active_nvertex_array)
-    nB = next(c1.active_nvertex_array)
-    nC = next(c1.active_nvertex_array)
+    nA = next(c1.active_vertex_array)
+    nB = next(c1.active_vertex_array)
+    nC = next(c1.active_vertex_array)
+
 
     #print(col[0], col[1], col[2])
 

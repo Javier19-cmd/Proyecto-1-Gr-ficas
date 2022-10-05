@@ -43,6 +43,9 @@ class Render(object):
     #Declarando la matriz de proyección.
     Projection = None
 
+    #Variable para identificar si hay normales.
+    normales = False
+
     #Creando matrices para el vértice y para el objeto.
     vertex_buffer_obj = [] #Buffer del vérice.
 
