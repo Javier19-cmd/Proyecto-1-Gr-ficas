@@ -32,7 +32,7 @@ def main():
     scale = (0.5, 0.5, 0.5) #Escala para las cajas.
     translate = (0, 0, 0) #Traslación para las cajas.
     
-    rotacion = (0, pi/6, 0) #Rotación para las cajas.
+    rotacion = (0, pi/3, 0) #Rotación para las cajas.
 
     print("Rotación: ", rotacion)
     
@@ -44,7 +44,7 @@ def main():
     #texturas("./model.obj", "./model.bmp", col1)
 
     modelo("./model.obj", "./model.bmp", col1)
-    
+        
     #dibujar("triangle") #Dibujando la imagen.
     #dibujar("square") #Dibujando la imagen.
     

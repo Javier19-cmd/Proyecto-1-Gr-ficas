@@ -29,15 +29,15 @@ class Texture: #Clase para la textura.
 
     def get_color(self, tx, ty): #Función que recibe dos coordenadas y que de el color en las coordenadas.
         
-        x = int(tx * self.width) #Redondeando el valor de x.
-        y = int(ty * self.height) #Redondeando el valor de y.
+        x = round(tx * self.width) #Redondeando el valor de x.
+        y = round(ty * self.height) #Redondeando el valor de y.
 
         return self.pixels[y][x] #Se devuelve el color de un pixel con una intensidad.
 
     def get_color_with_intensity(self, tx, ty, intensity): #Obteniendo el color con su intensidad.
         
-        x = int(tx * self.width) #Redondeando el valor de x.
-        y = int(ty * self.height) #Redondeando el valor de y.
+        x = round(tx * self.width) #Redondeando el valor de x.
+        y = round(ty * self.height) #Redondeando el valor de y.
 
         #print(x, y)
         

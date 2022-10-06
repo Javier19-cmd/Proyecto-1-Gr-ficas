@@ -543,7 +543,7 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                     vt2 = V3(*r.vts[ft2])
                     vt3 = V3(*r.vts[ft3])
                     #vt4 = V3(*r.vts[ft4])
-
+                    
                     #Guardando los vértices en una lista.
                     c1.vertex_buffer_obj.append(vt1)
                     c1.vertex_buffer_obj.append(vt2)
@@ -700,65 +700,42 @@ def triangle(): #Función que dibuja un triángulo.
     nB = next(c1.active_vertex_array)
     nC = next(c1.active_vertex_array)
 
+    L = V3(0, 0, 1) #Vector de luz.
+    N = cross((B - A), (C - A)) #Vector normal.
+    i = N.normalice() @ L.normalice() #Intensidad de la luz.
 
-    #print(col[0], col[1], col[2])
+    if i < 0:
+        i = abs(i)
 
-    #print(A, B, C) #Se imprimen las coordenadas.
-
-    L = V3(0, 0, 1) #Vector de la luz.
-
-    #print("Intensidad: ", i) #Se imprime la intensidad.
-
-    #print("Color: ", c1.colorP)
-
-    #c1.colorP = col #Se setea el color del punto. (En este caso gris)
+    #Color del triángulo.
+    gris = (1 * i)
 
 
-    #Calculando los mínimos y máximos de los puntos.
-    min, max = bounding_box(A, B, C) #Se calculan los mínimos y máximos de los puntos.
+    glColor(gris, gris, gris) #Color del triángulo.
 
-    #print("Mínimos: ", min.x, min.y)
-    #print("Máximos: ", max.x, max.y)
+    Bmin, Bmax = bounding_box(A, B, C) #Obteniendo los valores de los vértices.
+    Bmin.round()
+    Bmax.round()
 
-    #Redondeando los mínimos y máximos para poderlos meter a los for-loops.
-    min.round()
-    max.round()
+    for x in range(Bmin.x, Bmax.x + 1):
+        for y in range(Bmin.y, Bmax.y + 1):
+            w, v, u = baricentrico(A, B, C, V3(x, y))
 
-
-    for x in range(min.x, max.x + 1):
-        for y in range(min.y, max.y + 1):
-            w, v, u = baricentrico(A, B, C, V3(x, y)) #Se calcula el baricéntrico.
-
-            if u < 0 or v < 0 or w < 0: #Si el baricéntrico es mayor o igual a 0, entonces se dibuja el punto.
-                #print("Punto: ", x, y)
+            if w < 0 or v < 0 or u < 0:
                 continue
-            
-            #print("Color del fondo: ", c1.colorFondo)
-            #print("Color del punto", c1.colorP)
 
-            z = A.z * w + B.z * v + C.z * u #Se calcula la z.
+            z = A.z * w + B.z * v + C.z * u
 
-            if (
-                z >= 0 and
-                y >= 0 and
-                x < len(c1.zBuffer) and 
-                y < len(c1.zBuffer[0]) and 
-                c1.zBuffer[x][y] < z
-                ): #Si el zBuffer es menor a z, entonces se dibuja el punto.
-                c1.zBuffer[x][y] = z #Se setea la z.
-                
-                #print("Color del punto: ", active_shader)
-                
-                c1.colorP = shader(
-                    c1, 
-                    vertices=(A, B, C),
-                    texture_coords=(tA, tB, tC),
-                    normales=(nA, nB, nC),
-                    bar=(w, v, u),
-                    light = L
-                    ) #Creando los shaders con la función shader.
+            if (c1.zBuffer[x][y] < z):
+                c1.zBuffer[x][y] = z
 
-                glVertex(x, y) #Se dibuja el punto.
+                if c1.tpath: #Si hay textura.
+                    tx = tA.x * w + tB.x * u + tC.x * v
+                    ty = tA.y * w + tB.y * u + tC.y * v
+
+                    c1.colorP = c2.get_color_with_intensity(tx, ty, 1)
+
+                glVertex(x, y)
 
             #glVertex(x, y) #Se dibuja el punto.
 
