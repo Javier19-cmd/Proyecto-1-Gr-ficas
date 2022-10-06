@@ -16,7 +16,7 @@ def main():
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
     
-    glViewPort(150, 500, 600, 600) #Asignando el viewport.
+    glViewPort(-100, 500, 600, 600) #Asignando el viewport.
 
     col1 = (0.6, 0.1, 0.9) #Otro color.
 
@@ -32,7 +32,7 @@ def main():
     scale = (0.5, 0.5, 0.5) #Escala para las cajas.
     translate = (0, 0, 0) #Traslación para las cajas.
     
-    rotacion = (0, pi/3, 0) #Rotación para las cajas.
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
     print("Rotación: ", rotacion)
     
