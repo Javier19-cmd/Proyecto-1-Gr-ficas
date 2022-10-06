@@ -763,7 +763,7 @@ def triangle(): #Función que dibuja un triángulo.
             #glVertex(x, y) #Se dibuja el punto.
 
 def shader(render, **kwargs): #Función hace los shaders.
-   w, u, v = kwargs['bar'] #Se obtienen los valores de u, v y w.
+   w, v, u = kwargs['bar'] #Se obtienen los valores de u, v y w.
    tA, tB, tC = kwargs['texture_coords'] #Se obtienen los vértices de textura.
    nA, nB, nC = kwargs['normales'] #Se obtienen los vértices de normales.
    A, B, C = kwargs['vertices'] #Se obtienen los vértices.
@@ -774,10 +774,12 @@ def shader(render, **kwargs): #Función hace los shaders.
    iB = nB.normalice() @ L.normalice() #Se calcula la intensidad del punto B.
    iC = nC.normalice() @ L.normalice() #Se calcula la intensidad del punto C.
 
-   i = iA * w + iB * u + iC * v #Se calcula la intensidad del punto P.
+   i = iA * u + iB * v + iC * w #Se calcula la intensidad del punto P.
 
    if i < 0: #Si la intensidad es menor que 0, entonces se setea en 0.
         i = 0
+   if i > 1: 
+        i = 1 
 
    #print("Textura: ", tA, tB, tC) #Se imprimen los vértices de textura.
    #print("Intensidad: ", i) #Se imprime la intensidad.
@@ -785,8 +787,8 @@ def shader(render, **kwargs): #Función hace los shaders.
    #return color(0.7, 0.5, 0.1) #Se setea el color del punto con textura.
 
    if render.tpath: #Si el path2 no está vacío, entonces se dibuja el triángulo con textura.
-        tx = tA.x * w + tB.x * v + tC.x * u #Se calcula la x de la textura.
-        ty = tA.y * w + tB.y * v + tC.y * u #Se calcula la y de la textura.
+        tx = tA.x * w + tB.x * u + tC.x * v #Se calcula la x de la textura.
+        ty = tA.y * w + tB.y * u + tC.y * v #Se calcula la y de la textura.
 
         #print("Textura: ", abs(tx), abs(ty)) #Se imprimen los vértices de textura.
 
@@ -827,7 +829,7 @@ def shader(render, **kwargs): #Función hace los shaders.
 
         #return color(255/255, 255/255, 255/255) #Se setea el color del punto con textura.
 
-        return c2.get_color_with_intensity(tx, ty, i) #Se setea el color del punto con textura.
+        return render.colorP #Se setea el color del punto con textura.
 
     #print("Y: ", y)
     #return color(1, 0, 0)
