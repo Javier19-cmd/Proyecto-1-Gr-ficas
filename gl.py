@@ -727,7 +727,7 @@ def triangle(): #Función que dibuja un triángulo.
 
     for x in range(min.x, max.x + 1):
         for y in range(min.y, max.y + 1):
-            w, v, u = baricentrico(A, B, C, V3(x, y)) #Se calcula el baricéntrico.
+            w, u, v = baricentrico(A, B, C, V3(x, y)) #Se calcula el baricéntrico.
 
             if u < 0 or v < 0 or w < 0: #Si el baricéntrico es mayor o igual a 0, entonces se dibuja el punto.
                 #print("Punto: ", x, y)
@@ -747,7 +747,7 @@ def triangle(): #Función que dibuja un triángulo.
                 
                 c1.colorP = shader(
                     c1, 
-                    bar=(w, v, u),
+                    bar=(w, u, v),
                     texture_coords=(tA, tB, tC),
                     normales=(nA, nB, nC),
                     vertices=(A, B, C),
@@ -770,12 +770,7 @@ def shader(render, **kwargs): #Función hace los shaders.
    iB = nB.normalice() @ L.normalice() #Se calcula la intensidad del punto B.
    iC = nC.normalice() @ L.normalice() #Se calcula la intensidad del punto C.
 
-   i = iA * u + iB * v + iC * w #Se calcula la intensidad del punto P.
-
-   if i < 0: #Si la intensidad es menor que 0, entonces se setea en 0.
-        i = 0
-   if i > 1: 
-        i = 1 
+   i = abs(iA * v + iB * w + iC * u) #Se calcula la intensidad del punto P. Este se devuelve en valor absoluto para que no haya valores negativos.
 
    #print("Textura: ", tA, tB, tC) #Se imprimen los vértices de textura.
    #print("Intensidad: ", i) #Se imprime la intensidad.
@@ -783,8 +778,8 @@ def shader(render, **kwargs): #Función hace los shaders.
    #return color(0.7, 0.5, 0.1) #Se setea el color del punto con textura.
 
    if render.tpath: #Si el path2 no está vacío, entonces se dibuja el triángulo con textura.
-        tx = tA.x * w + tB.x * u + tC.x * v #Se calcula la x de la textura.
-        ty = tA.y * w + tB.y * u + tC.y * v #Se calcula la y de la textura.
+        tx = tA.x * v + tB.x * w + tC.x * u #Se calcula la x de la textura.
+        ty = tA.y * v + tB.y * w + tC.y * u #Se calcula la y de la textura.
 
         #print("Textura: ", abs(tx), abs(ty)) #Se imprimen los vértices de textura.
 
