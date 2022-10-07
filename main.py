@@ -11,12 +11,12 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(1024, 1024) #Creando la ventana.
-    glClearColor(1, 1, 1) #Color del fondo.
+    glCreateWindow(5120, 5120) #Creando la ventana.
+    glClearColor(0.5, 0.4, 0.1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
     
-    glViewPort(-100, 500, 600, 600) #Asignando el viewport.
+    glViewPort(-100, 300, 600, 600) #Asignando el viewport.
 
     col1 = (0.6, 0.1, 0.9) #Otro color.
 
@@ -43,12 +43,12 @@ def main():
 
     #texturas("./model.obj", "./model.bmp", col1)
 
-    modelo("./model.obj", "./model.bmp", col1)
+    modelo("./box.obj", "./box.bmp", col1)
         
-    #dibujar("triangle") #Dibujando la imagen.
+    dibujar("triangle") #Dibujando la imagen.
     #dibujar("square") #Dibujando la imagen.
     
-    drawModel() #Dibujando los triángulos del modelo.
+    #drawModel() #Dibujando los triángulos del modelo.
     # draw_square() #Dibujando la imagen.
 
     #drawModel() #Dibujando el modelo.

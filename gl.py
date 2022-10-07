@@ -463,12 +463,6 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                 v3 = transform_vertex(r.vertices[f3])
                 v4 = transform_vertex(r.vertices[f4])
 
-                #Guardando los vértices en una lista.
-                c1.vertex_buffer_obj.append(v1)
-                c1.vertex_buffer_obj.append(v2)
-                c1.vertex_buffer_obj.append(v3)
-                c1.vertex_buffer_obj.append(v4)
-
                 if c1.tpath: #Si hay una textura, entonces se dibuja la cara con textura.
                     
                     ft1 = face[0][1] - 1 #Se le resta 1 porque el array de vértices empieza en 0.
@@ -481,13 +475,6 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                     vt2 = V3(*r.vts[ft2])
                     vt3 = V3(*r.vts[ft3])
                     vt4 = V3(*r.vts[ft4])
-
-                    #Guardando los vértices en una lista.
-                    #Primer triángulo.
-                    c1.vertex_buffer_obj.append(vt1)
-                    c1.vertex_buffer_obj.append(vt2)
-                    c1.vertex_buffer_obj.append(vt3)
-                    c1.vertex_buffer_obj.append(vt4)
 
                     if r.normal:
                         #Verificando si el modelo tiene normales.
@@ -503,15 +490,43 @@ def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
                         vn3 = V3(*r.normal[fn3])
                         vn4 = V3(*r.normal[fn4])
 
-                        #Guardando los vértices en una lista.
-                        #Primer triángulo.
-                        c1.vertex_buffer_obj.append(vn1)
-                        c1.vertex_buffer_obj.append(vn2)
-                        c1.vertex_buffer_obj.append(vn3)
-                        c1.vertex_buffer_obj.append(vn4)
-                        
+                #Ahora se generan los triángulos.
+                
+                #Guardando el primer triángulo.
 
-                        c1.normales = True #Activando las normales.
+                #Vértices del triángulo.
+                c1.vertex_buffer_obj.append(v1)
+                c1.vertex_buffer_obj.append(v2)
+                c1.vertex_buffer_obj.append(v3)
+
+                #Texturas del triángulo.
+                c1.vertex_buffer_obj.append(vt1)
+                c1.vertex_buffer_obj.append(vt2)
+                c1.vertex_buffer_obj.append(vt3)
+
+                #Normales del triángulo.
+                c1.vertex_buffer_obj.append(vn1)
+                c1.vertex_buffer_obj.append(vn2)
+                c1.vertex_buffer_obj.append(vn3)
+
+
+                #Guardando el segundo triángulo.
+
+                #Vértices del triángulo.
+                c1.vertex_buffer_obj.append(v1)
+                c1.vertex_buffer_obj.append(v3)
+                c1.vertex_buffer_obj.append(v4)
+
+                #Texturas del triángulo.
+                c1.vertex_buffer_obj.append(vt1)
+                c1.vertex_buffer_obj.append(vt3)
+                c1.vertex_buffer_obj.append(vt4)
+
+                #Normales del triángulo.
+                c1.vertex_buffer_obj.append(vn1)
+                c1.vertex_buffer_obj.append(vn3)
+                c1.vertex_buffer_obj.append(vn4)
+                        
             
             elif len(face) == 3: #Validando que la cara tenga 3 vértices.
                 #El array de caras es bidimensional en este código.
@@ -577,8 +592,8 @@ def dibujar(poligono): #Función para dibujar los polígonos.
     if poligono == 'triangle': #Dibujando triángulos.
         try:
             while True: #Dibujando los triángulos.
-                #triangle() #Dibujando el triángulo.
-                triangle_wire() #Dibujando los triángulos.
+                triangle() #Dibujando el triángulo.
+                #triangle_wire() #Dibujando los triángulos.
                 #drawModel() #Dibujando los triángulos.
         except StopIteration:
             print('Dibujando triángulos...')
@@ -676,6 +691,8 @@ def square_wire(): #Función para dibujar los cuadrados en wireframe.
     glLine(D, A)
 
 
+#Método para dibujar los triángulos.
+
 def triangle(): #Función que dibuja un triángulo.
 
     #c1.active_vertex_array = iter(c1.vertex_buffer_obj) #Iterando el vertex buffer object.
@@ -757,6 +774,7 @@ def triangle(): #Función que dibuja un triángulo.
                 glVertex(x, y) #Se dibuja el punto.
 
             #glVertex(x, y) #Se dibuja el punto.
+
 
 def shader(render, **kwargs): #Función hace los shaders.
    w, u, v = kwargs['bar'] #Se obtienen los valores de u, v y w.
