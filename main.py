@@ -16,17 +16,9 @@ def main():
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
     
-    glViewPort(-100, 300, 600, 600) #Asignando el viewport.
+    #Primer modelo.
+    glViewPort(100, 300, 600, 600) #Asignando el viewport.
 
-    col1 = (0.6, 0.1, 0.9) #Otro color.
-
-    #Probando el lookat.
-    # El medium shot se hizo con estas medidas: V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0).
-    # El low angle se hizo con estas medidas: V3(10, -4.5, 0), V3(1, 0, 0), V3(0, 1, 0).
-    # El high agnle se hizo con estas medidas: V3(10, 12, 0), V3(1, 0, 0), V3(0, 1, 0) y las medidas 
-    # del viewport fueron glViewPort(900, 500, 300, 300).
-    # El dutch angle se hizo con estas medidas: scale = (0.75, 0.75, 1), translate = (1, 0.2, 0)
-    # rotacion = (0, 0, pi/2), glViewPort(700, 800, 300, 300) y lookAt(V3(0, 0, 10), V3(0, 1, 0), V3(0, 1, 0)). 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
     scale = (0.5, 0.5, 0.5) #Escala para las cajas.
@@ -39,22 +31,11 @@ def main():
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
-
-    #texturas("./model.obj", "./model.bmp", col1)
-
-    modelo("./box.obj", "./box.bmp", col1)
+    modelo("./box.obj", "./box.bmp") #Recibiendo el modelo y la textura.
         
     dibujar("triangle") #Dibujando la imagen.
-    #dibujar("square") #Dibujando la imagen.
+
     
-    #drawModel() #Dibujando los triángulos del modelo.
-    # draw_square() #Dibujando la imagen.
-
-    #drawModel() #Dibujando el modelo.
-
-    #triangle() #Dibujando un triángulo nada más.
-
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 
 main()

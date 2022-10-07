@@ -432,7 +432,7 @@ def glLine(v1, v2):
             #print(x, y)
 
 #Este método recibe ahora dos paths. Uno es para el obj y el otro es para el bmp.
-def modelo(path1, path2, col1): #Método para cargar un modelo 3D.
+def modelo(path1, path2): #Método para cargar un modelo 3D.
     r = Object(path1) #Llamando al método Object del archivo Obj.py.
 
     if path2: 
