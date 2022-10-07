@@ -509,7 +509,6 @@ def modelo(path1, path2): #Método para cargar un modelo 3D.
                 c1.vertex_buffer_obj.append(vn2)
                 c1.vertex_buffer_obj.append(vn3)
 
-
                 #Guardando el segundo triángulo.
 
                 #Vértices del triángulo.

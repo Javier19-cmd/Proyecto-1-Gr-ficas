@@ -21,7 +21,7 @@ def main():
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    scale = (0.5, 0.5, 0.5) #Escala para las cajas.
+    scale = (1, 1, 1) #Escala para las cajas.
     translate = (0, 0, 0) #Traslación para las cajas.
     
     rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
@@ -31,7 +31,26 @@ def main():
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    modelo("./box.obj", "./box.bmp") #Recibiendo el modelo y la textura.
+    modelo("./barrel.obj", "./barrel.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+        #Primer modelo.
+    glViewPort(400, 500, 600, 600) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./plants.obj", "./plants.bmp") #Recibiendo el modelo y la textura.
         
     dibujar("triangle") #Dibujando la imagen.
 
