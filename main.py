@@ -15,6 +15,8 @@ def main():
     glClearColor(0.5, 0.4, 0.1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
+
+    fondo("./pared.bmp")
     
     #Cargando el fondo de la imagen.
     #glViewPort(0, 0, 1024, 1024) #Creando el viewport.
@@ -30,7 +32,7 @@ def main():
     
     rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
-    print("Rotación: ", rotacion)
+    #print("Rotación: ", rotacion)
     
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
@@ -49,7 +51,7 @@ def main():
     
     rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
-    print("Rotación: ", rotacion)
+    #print("Rotación: ", rotacion)
     
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
@@ -68,7 +70,7 @@ def main():
     
     rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
-    print("Rotación: ", rotacion)
+    #print("Rotación: ", rotacion)
     
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
@@ -87,7 +89,7 @@ def main():
     
     rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
-    print("Rotación: ", rotacion)
+    #print("Rotación: ", rotacion)
     
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
@@ -95,6 +97,26 @@ def main():
     modelo("./Mask.obj", "./Mask.bmp") #Recibiendo el modelo y la textura.
         
     dibujar("triangle") #Dibujando la imagen.
+
+    # #Sexto modelo.
+    glViewPort(600, 1500, 700, 700) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (0.1, 0.1, 0.1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    #print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./sword.obj", "./sword.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+    
 
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 

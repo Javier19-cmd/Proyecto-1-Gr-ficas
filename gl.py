@@ -317,7 +317,7 @@ def loadViewMatrix(x, y, z, center):
 
     c1.view = Mi * Op2 #Multiplicando las matrices.
 
-    print("Matriz de vista sin numpy: ", c1.view)
+    #print("Matriz de vista sin numpy: ", c1.view)
 
 def loadProjectionMatrix(eye, center): #Calculando la proyección de la cámara.
 
@@ -811,7 +811,13 @@ def shader(render, **kwargs): #Función hace los shaders.
     #print("Y: ", y)
     #return color(1, 0, 0)
 
-    
+def fondo(path):
+    c2.load(path) #Se lee la imagen.
+
+    print("Ancho: ", c2.width)
+    print("Alto: ", c2.height)
+
+
 
 #Función que transforma los vértices de la estructura de la imagen.
 def transform_vertex(vertex):
