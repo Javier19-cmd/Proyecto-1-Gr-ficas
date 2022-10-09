@@ -804,19 +804,6 @@ def shader(render, **kwargs): #Función hace los shaders.
 
         b, g, r = c2.get_color_with_intensity(tx, ty, i) #Se obtiene el color de la textura con la intensidad.
 
-
-        # render.colorP = c2.get_color_with_intensity(tx, ty, i) #Se obtiene el color de la textura con la intensidad.
-
-        #print("Tipo del color: ", type(render.colorP))
-
-        #print("Colores generados: ", b, g, r)
-
-        #print("Color en el shader: ", render.colorP)
-
-        #print("Color en el shader: ", render.colorP)
-
-        #return color(255/255, 255/255, 255/255) #Se setea el color del punto con textura.
-
         col = color(r/255, g/255, b/255) #Se crea el color.
 
         return col #Se setea el color del punto con textura.

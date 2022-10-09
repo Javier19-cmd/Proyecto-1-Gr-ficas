@@ -77,6 +77,44 @@ def main():
         
     dibujar("triangle") #Dibujando la imagen.
     
+    #Cuarto modelo.
+    glViewPort(500, 500, 300, 300) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (0.5, 0.5, 0.5) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./barril.obj", "./barril.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+    #Quinto modelo.
+    glViewPort(300, 300, 300, 300) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (0.5, 0.5, 0.5) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./barrel2.obj", "./barrel2.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 
 main()
