@@ -824,6 +824,7 @@ def shader(render, **kwargs): #Función hace los shaders.
     #print("Y: ", y)
     #return color(1, 0, 0)
 
+    
 
 #Función que transforma los vértices de la estructura de la imagen.
 def transform_vertex(vertex):

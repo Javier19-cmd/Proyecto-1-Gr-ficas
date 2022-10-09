@@ -11,17 +11,21 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(10240, 10240) #Creando la ventana.
+    glCreateWindow(1024, 1024) #Creando la ventana.
     glClearColor(0.5, 0.4, 0.1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
     
+    #Cargando el fondo de la imagen.
+    glViewPort(0, 0, 1024, 1024) #Creando el viewport.
+    #loadBackground("Igloo.bmp") #Cargando el background.
+
     #Primer modelo.
     glViewPort(100, 300, 600, 600) #Asignando el viewport.
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    scale = (0.0000001, 0.0000001, 0.0000001) #Escala para las cajas.
+    scale = (1, 1, 1) #Escala para las cajas.
     translate = (0, 0, 0) #Traslación para las cajas.
     
     rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
@@ -31,7 +35,26 @@ def main():
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    modelo("./Table.obj", "./Table.bmp") #Recibiendo el modelo y la textura.
+    modelo("./Mask.obj", "./Mask.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+    #Segundo modelo.
+    glViewPort(200, 500, 600, 600) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./Mask1.obj", "./Mask1.bmp") #Recibiendo el modelo y la textura.
         
     dibujar("triangle") #Dibujando la imagen.
     

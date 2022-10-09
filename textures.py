@@ -34,6 +34,15 @@ class Texture: #Clase para la textura.
 
         return self.pixels[y][x] #Se devuelve el color de un pixel con una intensidad.
 
+    #Método para obtener el color de toda la textura recibiendo el path de la textura.
+    def get_texture(self, path):
+        
+        #Se lee la textura.
+        self.lectura(path)
+        
+        #Se crea una lista de pixeles.
+        return self.pixels
+
     def get_color_with_intensity(self, tx, ty, intensity): #Obteniendo el color con su intensidad.
         
         x = round(tx * self.width) #Redondeando el valor de x.
