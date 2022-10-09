@@ -11,17 +11,17 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(1024, 1024) #Creando la ventana.
+    glCreateWindow(2028, 2028) #Creando la ventana.
     glClearColor(0.5, 0.4, 0.1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
     
     #Cargando el fondo de la imagen.
-    glViewPort(0, 0, 1024, 1024) #Creando el viewport.
+    #glViewPort(0, 0, 1024, 1024) #Creando el viewport.
     #loadBackground("Igloo.bmp") #Cargando el background.
 
     #Primer modelo.
-    glViewPort(100, 300, 600, 600) #Asignando el viewport.
+    glViewPort(50, 300, 600, 600) #Asignando el viewport.
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
@@ -40,7 +40,7 @@ def main():
     dibujar("triangle") #Dibujando la imagen.
 
     #Segundo modelo.
-    glViewPort(200, 500, 600, 600) #Asignando el viewport.
+    glViewPort(100, 500, 600, 600) #Asignando el viewport.
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
@@ -55,6 +55,45 @@ def main():
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
     modelo("./Mask1.obj", "./Mask1.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+    #Tercer modelo.
+    glViewPort(300, 2000, 600, 600) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./Mask2.obj", "./Mask2.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+    #Cuarto modelo.
+    glViewPort(400, 1000, 600, 600) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./Mask3.obj", "./Mask3.bmp") #Recibiendo el modelo y la textura.
+    #print("Modelo 4")
         
     dibujar("triangle") #Dibujando la imagen.
     
