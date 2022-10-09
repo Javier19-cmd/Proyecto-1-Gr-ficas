@@ -11,7 +11,7 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(2028, 2028) #Creando la ventana.
+    glCreateWindow(3072, 3072) #Creando la ventana.
     glClearColor(0.5, 0.4, 0.1) #Color del fondo.
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
@@ -19,9 +19,9 @@ def main():
     #Cargando el fondo de la imagen.
     #glViewPort(0, 0, 1024, 1024) #Creando el viewport.
     #loadBackground("Igloo.bmp") #Cargando el background.
-
-    #Primer modelo.
-    glViewPort(50, 300, 600, 600) #Asignando el viewport.
+    
+    #Tercer modelo.
+    glViewPort(800, 50, 1000, 1000) #Asignando el viewport.
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
@@ -35,12 +35,12 @@ def main():
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    modelo("./Mask.obj", "./Mask.bmp") #Recibiendo el modelo y la textura.
+    modelo("./barrel.obj", "./barrel.bmp") #Recibiendo el modelo y la textura.
         
     dibujar("triangle") #Dibujando la imagen.
 
     #Segundo modelo.
-    glViewPort(100, 500, 1000, 1000) #Asignando el viewport.
+    glViewPort(275, 750, 1500, 1500) #Asignando el viewport.
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
@@ -58,46 +58,8 @@ def main():
         
     dibujar("triangle") #Dibujando la imagen.
 
-    #Tercer modelo.
-    glViewPort(100, 800, 1000, 1000) #Asignando el viewport.
-
-    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
-
-    scale = (1, 1, 1) #Escala para las cajas.
-    translate = (0, 0, 0) #Traslación para las cajas.
-    
-    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
-
-    print("Rotación: ", rotacion)
-    
-    #Esta llamada puede no estar acá.
-    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
-
-    modelo("./barrel.obj", "./barrel.bmp") #Recibiendo el modelo y la textura.
-        
-    dibujar("triangle") #Dibujando la imagen.
-    
-    #Cuarto modelo.
-    glViewPort(500, 500, 300, 300) #Asignando el viewport.
-
-    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
-
-    scale = (0.5, 0.5, 0.5) #Escala para las cajas.
-    translate = (0, 0, 0) #Traslación para las cajas.
-    
-    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
-
-    print("Rotación: ", rotacion)
-    
-    #Esta llamada puede no estar acá.
-    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
-
-    modelo("./barril.obj", "./barril.bmp") #Recibiendo el modelo y la textura.
-        
-    dibujar("triangle") #Dibujando la imagen.
-
     #Quinto modelo.
-    glViewPort(300, 300, 300, 300) #Asignando el viewport.
+    glViewPort(950, 50, 300, 300) #Asignando el viewport.
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
@@ -112,6 +74,25 @@ def main():
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
     modelo("./barrel2.obj", "./barrel2.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+    #Primer modelo.
+    glViewPort(-300, 750, 1500, 1500) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./Mask.obj", "./Mask.bmp") #Recibiendo el modelo y la textura.
         
     dibujar("triangle") #Dibujando la imagen.
 
