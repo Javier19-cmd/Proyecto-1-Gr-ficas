@@ -118,11 +118,11 @@ def main():
     dibujar("triangle") #Dibujando la imagen.
 
     #Octavo modelo.
-    glViewPort(100, 1250, 700, 700) #Asignando el viewport.
+    glViewPort(50, 1400, 500, 500) #Asignando el viewport.
 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    scale = (1, 1, 1) #Escala para las cajas.
+    scale = (0.7, 0.7, 0.7) #Escala para las cajas.
     translate = (0, 0, 0) #Traslación para las cajas.
     
     rotacion = (pi/2, 0, pi/2) #Rotación para las cajas.
