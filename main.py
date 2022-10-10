@@ -13,10 +13,10 @@ from textures import * #Importando los métodos del archivo textures.py.
 def main():
     glCreateWindow(3072, 3072) #Creando la ventana.
     glClearColor(0.5, 0.4, 0.1) #Color del fondo.
+    #fondo("./pared.bmp")
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
 
-    fondo("./pared.bmp")
     
     #Cargando el fondo de la imagen.
     #glViewPort(0, 0, 1024, 1024) #Creando el viewport.
@@ -116,8 +116,26 @@ def main():
     modelo("./sword.obj", "./sword.bmp") #Recibiendo el modelo y la textura.
         
     dibujar("triangle") #Dibujando la imagen.
-    
 
+    #Octavo modelo.
+    glViewPort(100, 1250, 700, 700) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (pi/2, 0, pi/2) #Rotación para las cajas.
+
+    #print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./bow.obj", "./bow.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+    
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 
 main()
