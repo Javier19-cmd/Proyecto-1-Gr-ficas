@@ -814,8 +814,9 @@ def shader(render, **kwargs): #Función hace los shaders.
 def fondo(path):
     c2.load(path) #Se lee la imagen.
 
-    c1.colorFondo = c2.pixels[0] #Se setea el color del fondo.
-    c1.colorFondo = c2.pixels[1] #Se setea el color del fondo.
+    #print("Colores: ", c2.pixels) #Se imprimen los colores.
+
+    c1.framebuffer = c2.pixels #Se setea el framebuffer con los colores de la imagen.
 
 #Función que transforma los vértices de la estructura de la imagen.
 def transform_vertex(vertex):

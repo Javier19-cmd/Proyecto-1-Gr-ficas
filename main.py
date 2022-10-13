@@ -11,11 +11,12 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(3072, 3072) #Creando la ventana.
+    glCreateWindow(3072, 2044) #Creando la ventana.
     glClearColor(0.5, 0.4, 0.1) #Color del fondo.
     #fondo("./pared.bmp")
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
     glColor(0.5, 0.5, 0.5) #Color del punto.
+    fondo("./pared.bmp") #Imprimiendo el fondo de momento.
 
     
     #Cargando el fondo de la imagen.
