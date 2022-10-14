@@ -43,6 +43,22 @@ class Render(object):
     #Declarando la matriz de proyección.
     Projection = None
 
+    #Variable para identificar si hay normales.
+    normales = False
+
+    #Creando matrices para el vértice y para el objeto.
+    vertex_buffer_obj = [] #Buffer del vérice.
+
+    #Lista para los vértices de las texturas.
+    tvertex_buffer_obj = []
+
+    #Lista para los vértices de las normales.
+    nvertex_buffer_obj = []
+
+    #Vértices activos.
+    active_vertex_array = [] #Lista para los vértices normales activos.
+    active_tvertex_array = [] #Lista para los vértices de texturas activos.
+    active_nvertex_array = [] #Lista para los vértices normales activos.
 
     #Método que escribe el archivo bmp.
     def write(self): #Escribir un archivo, pero con el zbuffer.

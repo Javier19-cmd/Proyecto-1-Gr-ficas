@@ -29,15 +29,32 @@ class Texture: #Clase para la textura.
 
     def get_color(self, tx, ty): #Función que recibe dos coordenadas y que de el color en las coordenadas.
         
-        x = int(tx * self.width) #Redondeando el valor de x.
-        y = int(ty * self.height) #Redondeando el valor de y.
+        x = round(tx * self.width) #Redondeando el valor de x.
+        y = round(ty * self.height) #Redondeando el valor de y.
 
         return self.pixels[y][x] #Se devuelve el color de un pixel con una intensidad.
 
+    def load(self, path): #Función que carga la textura.
+        self.lectura(path)
+
+        #Obteniendo el ancho y el alto de la textura.
+        self.width = self.width
+        self.height = self.height
+
+        #print(self.width, self.height) #Imprimiendo el ancho y el alto de la textura.
+
+        #print("Tipo de textura: ", type(self.pixels)) #Imprimiendo el tipo de textura.
+    
+
+        #Devolviendo el color de la textura en rgb.
+        return self.pixels
+
     def get_color_with_intensity(self, tx, ty, intensity): #Obteniendo el color con su intensidad.
         
-        x = int(tx * self.width) #Redondeando el valor de x.
-        y = int(ty * self.height) #Redondeando el valor de y.
+        x = round(tx * self.width) #Redondeando el valor de x.
+        y = round(ty * self.height) #Redondeando el valor de y.
+
+        #print(x, y)
         
         #print(tx, ty, x, y) #Imprimiendo los valores de x y y.
 
@@ -55,7 +72,7 @@ class Texture: #Clase para la textura.
         r = int(self.pixels[y][x][2] * intensity) #Obteniendo el valor de r.
 
         return color(r/255, g/255, b/255) #Se devuelve el color de un pixel con una intensidad.
-        #else:
-         #   return color(0, 0, 0)
+        # else:
+        #        return color(0, 0, 0)
 #t = Texture("./earth.bmp") #Se crea la textura.
 #print(t.get_color_with_intensity(0, 0, 1)) #Se obtiene el color de un pixel.

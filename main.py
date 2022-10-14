@@ -11,74 +11,132 @@ from gl import * #Importando el archivo gl.py, para crear la imagen.
 from textures import * #Importando los métodos del archivo textures.py.
 
 def main():
-    glCreateWindow(5120, 5120) #Creando la ventana.
-    glClearColor(1, 1, 1) #Color del fondo.
+    glCreateWindow(3072, 2044) #Creando la ventana.
+    glClearColor(0.5, 0.4, 0.1) #Color del fondo.
+    #fondo("./pared.bmp")
     glClear() #Limpiando el framebuffer con el color creado en glClearColor.
+    glColor(0.5, 0.5, 0.5) #Color del punto.
+    fondo("./pared.bmp") #Imprimiendo el fondo de momento.
+
     
-    glViewPort(1000, 900, 500, 500) #Asignando el viewport.
+    #Cargando el fondo de la imagen.
+    #glViewPort(0, 0, 1024, 1024) #Creando el viewport.
+    #loadBackground("Igloo.bmp") #Cargando el background.
+    
+    #Tercer modelo.
+    glViewPort(800, 50, 1000, 1000) #Asignando el viewport.
 
-    col1 = (0.6, 0.1, 0.9) #Otro color.
-
-    #Probando el lookat.
-    # El medium shot se hizo con estas medidas: V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0).
-    # El low angle se hizo con estas medidas: V3(10, -4.5, 0), V3(1, 0, 0), V3(0, 1, 0).
-    # El high agnle se hizo con estas medidas: V3(10, 12, 0), V3(1, 0, 0), V3(0, 1, 0) y las medidas 
-    # del viewport fueron glViewPort(900, 500, 300, 300).
-    # El dutch angle se hizo con estas medidas: scale = (0.75, 0.75, 1), translate = (1, 0.2, 0)
-    # rotacion = (0, 0, pi/2), glViewPort(700, 800, 300, 300) y lookAt(V3(0, 0, 10), V3(0, 1, 0), V3(0, 1, 0)). 
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    scale = (0.1, 0.1, 0.1) #Escala para las cajas.
-    translate = (1, 0.2, 0) #Traslación para las cajas.
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
     
-    rotacion = (0, 0, 0) #Rotación para las cajas.
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
-    print("Rotación: ", rotacion)
+    #print("Rotación: ", rotacion)
     
     #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    #Esta función ahora recibe primero el path del obj, luego el path del bmp, el color.
-    modelo("./arbol.obj", "./arbol.bmp", col1)
+    modelo("./barrel.obj", "./barrel.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
 
-    # #Creando otro modelo.
-    glViewPort(1000, 2000, 300, 300) #Asignando el viewport.
-    col2 = (0.1, 0.9, 0.6) #Otro color.
-    
+    #Segundo modelo.
+    glViewPort(275, 750, 1500, 1500) #Asignando el viewport.
+
     lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    translate = (0, 0, 0) #Traslación para las cajas.
-    rotacion = (0, 0, 0) #Rotación para las cajas.
     scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
+    #print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    modelo("./plants.obj", "./plants.bmp", col2)
+    modelo("./Mask1.obj", "./Mask1.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
 
-    #Creando otro modelo.
-    glViewPort(1000, 3000, 300, 300) #Asignando el viewport.
-    col3 = (0.1, 0.9, 0.6) #Otro color.
+    #Quinto modelo.
+    glViewPort(950, 50, 300, 300) #Asignando el viewport.
 
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (0.5, 0.5, 0.5) #Escala para las cajas.
     translate = (0, 0, 0) #Traslación para las cajas.
-    rotacion = (0, 0, 0) #Rotación para las cajas.
-    scale = (1, 1, 1) #Escala para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
+    #print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
     loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
-    modelo("./box.obj", "./box.bmp", col3)
+    modelo("./barrel2.obj", "./barrel2.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
 
-    # #Creando otro modelo.
-    # glViewPort(2000, 4000, 300, 300) #Asignando el viewport.
-    # col4 = (0.1, 0.9, 0.6) #Otro color.
+    #Primer modelo.
+    glViewPort(-300, 750, 1500, 1500) #Asignando el viewport.
 
-    # translate = (0, 0, 0) #Traslación para las cajas.
-    # rotacion = (0, 0, 0) #Rotación para las cajas.
-    # scale = (0.1, 0.1, 0.1) #Escala para la manzana.
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
 
-    # loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+    scale = (1, 1, 1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
 
-    # modelo("./Vase.obj", "./Vase.bmp", col4)
+    #print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
 
+    modelo("./Mask.obj", "./Mask.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+    # #Sexto modelo.
+    glViewPort(600, 1500, 700, 700) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (0.1, 0.1, 0.1) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (0, pi/2.5, 0) #Rotación para las cajas.
+
+    #print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./sword.obj", "./sword.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+
+    #Octavo modelo.
+    glViewPort(50, 1400, 500, 500) #Asignando el viewport.
+
+    lookAt(V3(25, 0, 10), V3(0, 1, 0), V3(0, 1, 0))
+
+    scale = (0.7, 0.7, 0.7) #Escala para las cajas.
+    translate = (0, 0, 0) #Traslación para las cajas.
+    
+    rotacion = (pi/2, 0, pi/2) #Rotación para las cajas.
+
+    #print("Rotación: ", rotacion)
+    
+    #Esta llamada puede no estar acá.
+    loadModelMatrix(translate, scale, rotacion) #Se carga la matriz de transformación del modelo. Acá se recibe la traslación, la escala y la rotación.
+
+    modelo("./bow.obj", "./bow.bmp") #Recibiendo el modelo y la textura.
+        
+    dibujar("triangle") #Dibujando la imagen.
+    
     glFinish() #Escribiendo el framebuffer en la imagen y guardándola en un archivo.
 
 main()
